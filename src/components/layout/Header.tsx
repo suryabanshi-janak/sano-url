@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 export default function Header() {
   const navigate = useNavigate();
 
-  const user = true;
+  const user = false;
 
   return (
     <nav className='flex items-center justify-between py-4'>
@@ -28,7 +28,7 @@ export default function Header() {
           <Button onClick={() => navigate('/auth')}>Login</Button>
         ) : (
           <DropdownMenu>
-            <DropdownMenuTrigger className='w-10 rounded-full overflow-hidden'>
+            <DropdownMenuTrigger className='w-10 overflow-hidden rounded-full'>
               <Avatar>
                 <AvatarImage src='https://github.com/shadcn.png' />
                 <AvatarFallback>U</AvatarFallback>
