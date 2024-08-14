@@ -17,6 +17,7 @@ import Error from '../Error';
 import useFetch from '@/hooks/useFetch';
 import { login } from '@/db/auth';
 import { AuthError } from '@supabase/supabase-js';
+import { UrlState } from '../URLProvider';
 
 const schema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
@@ -40,9 +41,11 @@ export default function Login() {
   };
 
   const { data, error, loading, fn: loginFn } = useFetch(login, formData);
+  const { fetchUser } = UrlState();
 
   useEffect(() => {
     if (error === null && data) {
+      fetchUser();
       navigate(`/dashboard?${url ? `url=${url}` : ''}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
