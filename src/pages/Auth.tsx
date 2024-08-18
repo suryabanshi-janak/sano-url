@@ -1,11 +1,23 @@
-import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Login from '@/components/auth/Login';
 import SignUp from '@/components/auth/SignUp';
+import { UrlState } from '@/components/URLProvider';
 
 export default function AuthPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const longLink = searchParams.get('url');
+
+  const { isAuthenticated, loading } = UrlState();
+
+  useEffect(() => {
+    if (isAuthenticated && !loading)
+      navigate(`/dashboard?${longLink ? `url=${longLink}` : ''}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, loading, navigate]);
 
   return (
     <div className='flex flex-col items-center gap-10 mt-12'>
