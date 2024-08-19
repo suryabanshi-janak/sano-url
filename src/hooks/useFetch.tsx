@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 
-const useFetch = (cb: any, options = {}) => {
+const useFetch = (cb: any, options = {}): any => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState<boolean | null>(null);
   const [error, setError] = useState<unknown>(null);
